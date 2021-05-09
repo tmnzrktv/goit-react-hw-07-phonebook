@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import styles from '../СontactForm/ContactForm.module.css';
 import { connect } from 'react-redux';
-import phonebookOperations from '../../Redux/Phonebook/phonebook-operations';
+import { phonebookOperations } from '../../Redux/Phonebook';
+
+import styles from '../СontactForm/ContactForm.module.css';
 
 class ContactForm extends Component {
     state = {

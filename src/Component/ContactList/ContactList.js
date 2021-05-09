@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import styles from '../ContactList/ContactList.module.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import phonebookOperations from '../../Redux/Phonebook/phonebook-operations';
+import { phonebookOperations, phonebookSelectors } from '../../Redux/Phonebook';
+
+import styles from '../ContactList/ContactList.module.css';
 
 class ContactList extends Component {
     componentDidMount() {
@@ -34,17 +35,9 @@ class ContactList extends Component {
     }
 }
 
-const getVisibleItems = (allItems, filter) => {
-    const normalizedFilter = filter.toLowerCase();
-
-    return allItems.filter(item =>
-        item.name.toLowerCase().includes(normalizedFilter),
-    );
-};
-
-const mapStateToProps = ({ phonebook: { items, filter, loading } }) => ({
-    items: getVisibleItems(items, filter),
-    isLoadingContacts: loading,
+const mapStateToProps = state => ({
+    items: phonebookSelectors.getVisibleContacts(state),
+    isLoadingContacts: phonebookSelectors.getLoading(state),
 });
 
 const mapDispatchToProps = dispatch => ({
